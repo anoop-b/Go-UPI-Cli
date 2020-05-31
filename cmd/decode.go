@@ -24,8 +24,9 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"net/url"
+
+	"github.com/spf13/cobra"
 )
 
 // decodeCmd represents the decode command
@@ -38,6 +39,7 @@ and usage of using your command. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
+	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("decode called")
 		parse(args[0])
