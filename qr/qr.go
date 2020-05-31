@@ -1,6 +1,8 @@
 package qr
 
 import (
+	"fmt"
+
 	"github.com/skip2/go-qrcode"
 )
 
@@ -8,7 +10,7 @@ import (
 func RenderString(s string) {
 	q, err := qrcode.New(s, qrcode.Medium)
 	if err != nil {
-		println("Content too long for QRcode")
+		panic(err)
 	}
-	print(q.ToSmallString(false))
+	fmt.Println(q.ToSmallString(false))
 }
