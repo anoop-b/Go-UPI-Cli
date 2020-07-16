@@ -31,14 +31,12 @@ import (
 // qrcodeCmd represents the qrcode command
 var qrcodeCmd = &cobra.Command{
 	Use:   "qrcode",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Args: cobra.ExactArgs(1),
+	Short: "Generate Qrcode from String",
+	Long: ` Generates a qrcode and prints it as 
+	a string to the stdout. UPI request/send 
+	strings can be used as input (string format)`,
+	Example: "upi qrcode 'upi://pa.... '",
+	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("qrcode generate for:", args[0])
 		qr.RenderString(args[0])
