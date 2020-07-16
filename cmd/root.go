@@ -33,14 +33,12 @@ var cfgFile string
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "upi",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Args: cobra.MinimumNArgs(1),
+	Short: "A CLI tool for UPI",
+	Long: `This tool can be used as a tool
+	for common upi operations like generating a 
+	payment request, intent generation, etc.`,
+	Example: "use: `upi help` for a list of all available commands",
+	Args:    cobra.MinimumNArgs(1),
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	//	Run: func(cmd *cobra.Command, args []string) { },
