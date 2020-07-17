@@ -18,6 +18,9 @@ For a list of all available commands
 ```sh
 upi help
 ```
+## Resources
+- UPI specification [docs](https://www.npci.org.in/sites/default/files/UPI%20Linking%20Specs_ver%201.6.pdf) by NPCI
+- UPI official [website](https://www.npci.org.in/product-overview/upi-product-overview)
 
 ## Author
 
