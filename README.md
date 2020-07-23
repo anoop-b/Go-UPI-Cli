@@ -18,7 +18,15 @@ For a list of all available commands
 ```sh
 upi help
 ```
+
+## ToDo:
+
+- [ ] Generate UPI object from cli
+- [ ] supoprt base64 encryption and decryption
+- [ ] support PKI generation, signing and decryption.
+
 ## Resources
+
 - UPI specification [docs](https://www.npci.org.in/sites/default/files/UPI%20Linking%20Specs_ver%201.6.pdf) by NPCI
 - UPI official [website](https://www.npci.org.in/product-overview/upi-product-overview)
 
