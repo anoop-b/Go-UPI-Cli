@@ -39,6 +39,7 @@ var rootCmd = &cobra.Command{
 	payment request, intent generation, etc.`,
 	Example: "use: `upi help` for a list of all available commands",
 	Args:    cobra.MinimumNArgs(1),
+	Version: "0.1",
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	//	Run: func(cmd *cobra.Command, args []string) { },
