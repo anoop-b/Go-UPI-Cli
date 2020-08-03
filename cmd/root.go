@@ -26,6 +26,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/cobra/doc"
 )
 
 var cfgFile string
@@ -42,6 +43,7 @@ var rootCmd = &cobra.Command{
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	//	Run: func(cmd *cobra.Command, args []string) { },
+	DisableAutoGenTag: true,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -51,6 +53,7 @@ func Execute() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+	doc.GenMarkdownTree(rootCmd, "./documentaion")
 }
 
 // func init() {
