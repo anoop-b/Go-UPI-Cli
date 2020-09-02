@@ -23,6 +23,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -33,11 +34,9 @@ var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "upi",
-	Short: "A CLI tool for UPI",
-	Long: `This tool can be used as a tool
-	for common upi operations like generating a 
-	payment request, intent generation, etc.`,
+	Use:     "upi",
+	Short:   "A CLI tool for UPI",
+	Long:    "This tool can be used as a tool for common upi operations like generating a payment request, intent generation, etc.",
 	Example: "use: `upi help` for a list of all available commands",
 	Args:    cobra.MinimumNArgs(1),
 	// Uncomment the following line if your bare application
@@ -53,7 +52,10 @@ func Execute() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	doc.GenMarkdownTree(rootCmd, "./documentaion")
+	err := doc.GenMarkdownTree(rootCmd, "./documentation")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // func init() {
