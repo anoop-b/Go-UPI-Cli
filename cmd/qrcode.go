@@ -30,11 +30,9 @@ import (
 
 // qrcodeCmd represents the qrcode command
 var qrcodeCmd = &cobra.Command{
-	Use:   "qrcode",
-	Short: "Generate Qrcode from String",
-	Long: ` Generates a qrcode and prints it as 
-	a string to the stdout. UPI request/send 
-	strings can be used as input (string format)`,
+	Use:     "qrcode",
+	Short:   "Generate Qrcode from String",
+	Long:    "Generates a qrcode and prints it as a string to the stdout. UPI request/send strings can be used as input (string format)",
 	Example: "upi qrcode 'upi://pa.... '",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

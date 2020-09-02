@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	docsURL = "https://github.com/anoop-b/"
+	docsURL = "https://github.com/anoop-b/Go-UPI-Cli"
 )
 
 //Launch url for project wiki/documentation
