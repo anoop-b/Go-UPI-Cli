@@ -34,9 +34,11 @@ var keysCmd = &cobra.Command{
 	Short: "Generates a RSA-512 keypair(public and private key)",
 	Long:  "Generates a RSA-512 keypair(public and private key)",
 	Run: func(cmd *cobra.Command, args []string) {
-		publicKey, privateKey := keypair.GenerateRsaKeys(512)
-		fmt.Println(publicKey)
-		fmt.Println(privateKey)
+		privateKey := keypair.GenerateRsaKeys(512)
+		pk := keypair.ExportRsaPrivateKeyAsPemStr(privateKey)
+		pubKey := keypair.ExportRsaPublicKeyAsPemStr(&privateKey.PublicKey)
+		fmt.Println(pk)
+		fmt.Println(pubKey)
 	},
 }
 
