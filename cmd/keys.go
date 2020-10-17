@@ -23,33 +23,33 @@ package cmd
 
 import (
 	"fmt"
+	keypair "upi/keys"
 
 	"github.com/spf13/cobra"
 )
 
-// generateCmd represents the generate command
-var generateCmd = &cobra.Command{
-	Use:   "generate",
-	Short: "Generates a upi intent object",
-	Long: `used to generate a send/receive object 
-	that can be used as a upi intent object and generate 
-	qrcode from the same.`,
+// keysCmd represents the keys command
+var keysCmd = &cobra.Command{
+	Use:   "keys",
+	Short: "Generates a RSA-512 keypair(public and private key)",
+	Long:  "Generates a RSA-512 keypair(public and private key)",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("generate called")
+		publicKey, privateKey := keypair.GenerateRsaKeys(512)
+		fmt.Println(publicKey)
+		fmt.Println(privateKey)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(generateCmd)
+	generateCmd.AddCommand(keysCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	generateCmd.Flags().String("send", "", "generates a send request")
-	generateCmd.Flags().String("receive", "", "generates a receive request")
+	// keysCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// generateCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// keysCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
