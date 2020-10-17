@@ -9,23 +9,19 @@ import (
 )
 
 //GenerateRsaKeys Generates RSA key pair and returns them as pem string
-func GenerateRsaKeys(bits int) (string, string) {
+func GenerateRsaKeys(bits int) *rsa.PrivateKey {
 	privateKey, err := rsa.GenerateKey(rand.Reader, bits)
 	if err != nil {
 		fmt.Println(err)
 	}
-	pemPublic, err := exportRsaPublicKeyAsPemStr(&privateKey.PublicKey)
-	if err != nil {
-		fmt.Println(err)
-	}
-	pemPrivate := exportRsaPrivateKeyAsPemStr(privateKey)
-	return pemPublic, pemPrivate
+	return privateKey
 }
 
-func exportRsaPublicKeyAsPemStr(pubkey *rsa.PublicKey) (string, error) {
+//ExportRsaPublicKeyAsPemStr exports RSA public key as pem string
+func ExportRsaPublicKeyAsPemStr(pubkey *rsa.PublicKey) string {
 	pubkeyBytes, err := x509.MarshalPKIXPublicKey(pubkey)
 	if err != nil {
-		return "", err
+		fmt.Println(err)
 	}
 	pubkeyPem := pem.EncodeToMemory(
 		&pem.Block{
@@ -34,10 +30,11 @@ func exportRsaPublicKeyAsPemStr(pubkey *rsa.PublicKey) (string, error) {
 		},
 	)
 
-	return string(pubkeyPem), nil
+	return string(pubkeyPem)
 }
 
-func exportRsaPrivateKeyAsPemStr(privkey *rsa.PrivateKey) string {
+//ExportRsaPrivateKeyAsPemStr exports RSA private key as pem string
+func ExportRsaPrivateKeyAsPemStr(privkey *rsa.PrivateKey) string {
 	privkeyBytes := x509.MarshalPKCS1PrivateKey(privkey)
 	privkeyPem := pem.EncodeToMemory(
 		&pem.Block{
