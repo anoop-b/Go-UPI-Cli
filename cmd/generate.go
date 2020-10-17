@@ -46,8 +46,8 @@ func init() {
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	generateCmd.PersistentFlags().String("send", "", "generates a send request")
-	generateCmd.PersistentFlags().String("receive", "", "generates a receive request")
+	generateCmd.Flags().String("send", "", "generates a send request")
+	generateCmd.Flags().String("receive", "", "generates a receive request")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
