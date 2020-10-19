@@ -24,6 +24,7 @@ package cmd
 import (
 	"fmt"
 	upi "upi/init"
+	keypair "upi/keys"
 
 	"github.com/spf13/cobra"
 )
@@ -41,6 +42,12 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		intent := upi.GenerateIntent()
 		fmt.Println(intent)
+		privateKey := keypair.GenerateRsaKeys(512)
+		hashedIntent := upi.GetHash(intent)
+		signature := upi.SignIntent(privateKey, hashedIntent)
+		fmt.Println("Signature:", signature)
+		response := upi.VerifySignature(&privateKey.PublicKey, hashedIntent, signature)
+		fmt.Println("Verification passed:", response)
 	},
 }
 
