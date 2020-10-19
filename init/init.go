@@ -34,9 +34,6 @@ func GenerateIntent() string {
 	return intentString.Encode()
 }
 
-// SignIntent generates and returns rsa signature of intent string
-func SignIntent(privateKey *rsa.PrivateKey, rawIntent string) string {
-
 // GetHash generates a sha256 hash or given input
 func GetHash(rawString string) []byte {
 	hash := sha256.New()
@@ -45,7 +42,10 @@ func GetHash(rawString string) []byte {
 	return hashed
 }
 
-	signature, err := rsa.SignPSS(rand.Reader, privateKey, crypto.SHA256, hashed, nil)
+// SignIntent generates and returns rsa signature of intent string
+func SignIntent(privateKey *rsa.PrivateKey, rawIntent []byte) string {
+
+	signature, err := rsa.SignPSS(rand.Reader, privateKey, crypto.SHA256, rawIntent, nil)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -56,18 +56,14 @@ func GetHash(rawString string) []byte {
 }
 
 // VerifySignature verify's the integrity of the data(intent) and the correspoding signature
-func VerifySignature(publicKey *rsa.PublicKey, rawIntent string, signature string) bool {
-
-	hash := sha256.New()
-	hash.Write([]byte(rawIntent))
-	hashed := hash.Sum(nil)
+func VerifySignature(publicKey *rsa.PublicKey, hashedIntent []byte, signature string) bool {
 	signatureString, err := base64.StdEncoding.DecodeString(signature)
 	if err != nil {
 		fmt.Println(err)
 		panic(err)
 	}
 
-	err = rsa.VerifyPSS(publicKey, crypto.SHA256, []byte(signatureString), hashed, nil)
+	err = rsa.VerifyPSS(publicKey, crypto.SHA256, hashedIntent, []byte(signatureString), nil)
 	if err != nil {
 		return false
 	}
