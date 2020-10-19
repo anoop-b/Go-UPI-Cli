@@ -23,5 +23,6 @@ use: `upi help` for a list of all available commands
 * [upi decode](upi_decode.md)	 - Parse and print UPI request/response string
 * [upi docs](upi_docs.md)	 - opens the project homepage
 * [upi generate](upi_generate.md)	 - Generates a upi intent object
+* [upi init](upi_init.md)	 - A brief description of your command
 * [upi qrcode](upi_qrcode.md)	 - Generate Qrcode from String
 
