@@ -37,9 +37,13 @@ func GenerateIntent() string {
 // SignIntent generates and returns rsa signature of intent string
 func SignIntent(privateKey *rsa.PrivateKey, rawIntent string) string {
 
+// GetHash generates a sha256 hash or given input
+func GetHash(rawString string) []byte {
 	hash := sha256.New()
-	hash.Write([]byte(rawIntent))
+	hash.Write([]byte(rawString))
 	hashed := hash.Sum(nil)
+	return hashed
+}
 
 	signature, err := rsa.SignPSS(rand.Reader, privateKey, crypto.SHA256, hashed, nil)
 	if err != nil {
