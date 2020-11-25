@@ -41,17 +41,28 @@ func GenerateIntent() url.URL {
 		purpose: 00,
 		orgid:   189999,
 	}
+	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Enter UPI ID:")
 	fmt.Scanln(&intent.pa)
 	fmt.Println("Enter Name:")
-	fmt.Scanln(&intent.pn)
+	intent.pn, _ = reader.ReadString('\n')
 	fmt.Println("Enter Amount:")
 	fmt.Scanln(&intent.am)
-	intentString := url.Values{}
+	fmt.Println("Enter Notes:")
+	intent.tn, _ = reader.ReadString('\n')
+	u:= url.URL{
+		Scheme: "upi",
+		Host: "pay",
+	}
+	intentString := u.Query()
 	intentString.Set("pa", intent.pa)
 	intentString.Set("pn", intent.pn)
 	intentString.Set("am", strconv.Itoa(intent.am))
-	return intentString.Encode()
+	intentString.Set("cu", intent.cu)
+	intentString.Set("mode", strconv.FormatUint(uint64(intent.mode), 10))
+	intentString.Set("tn", intent.tn)
+	u.RawQuery=intentString.Encode()
+	return u
 }
 
 // GetHash generates a sha256 hash or given input
