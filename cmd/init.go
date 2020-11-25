@@ -25,6 +25,7 @@ import (
 	"fmt"
 	upi "upi/init"
 	keypair "upi/keys"
+	"upi/qr"
 
 	"github.com/spf13/cobra"
 )
@@ -37,11 +38,13 @@ var initCmd = &cobra.Command{
 taking VPA, name, among others as input fields`,
 	Run: func(cmd *cobra.Command, args []string) {
 		intent := upi.GenerateIntent()
-		fmt.Println(intent)
+		fmt.Println("unsigned intent:",intent.String())
 		privateKey := keypair.GenerateRsaKeys(512)
-		hashedIntent := upi.GetHash(intent)
+		hashedIntent := upi.GetHash(intent.String())
 		signature := upi.SignIntent(privateKey, hashedIntent)
-		fmt.Println("Signature:", signature)
+		signedIntent:= upi.Concatenate(intent,signature)
+		fmt.Println("Signed Intent:", signedIntent)
+		qr.RenderString(signedIntent)
 		response := upi.VerifySignature(&privateKey.PublicKey, hashedIntent, signature)
 		fmt.Println("Verification passed:", response)
 	},
