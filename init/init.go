@@ -100,3 +100,10 @@ func VerifySignature(publicKey *rsa.PublicKey, hashedIntent []byte, signature st
 	}
 	return true
 }
+
+func Concatenate(unsignedIntent url.URL,signature string) string {
+	intent:=unsignedIntent.Query()
+	intent.Set("sign",signature)
+	unsignedIntent.RawQuery=intent.Encode()
+	return unsignedIntent.String()
+}
