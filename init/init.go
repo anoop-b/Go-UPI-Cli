@@ -86,7 +86,7 @@ func SignIntent(privateKey *rsa.PrivateKey, rawIntent []byte) string {
 
 }
 
-// VerifySignature verify's the integrity of the data(intent) and the correspoding signature
+// VerifySignature verifies the integrity of the data(intent) and the corresponding signature
 func VerifySignature(publicKey *rsa.PublicKey, hashedIntent []byte, signature string) bool {
 	signatureString, err := base64.StdEncoding.DecodeString(signature)
 	if err != nil {
@@ -94,7 +94,7 @@ func VerifySignature(publicKey *rsa.PublicKey, hashedIntent []byte, signature st
 		panic(err)
 	}
 
-	err = rsa.VerifyPSS(publicKey, crypto.SHA256, hashedIntent, []byte(signatureString), nil)
+	err = rsa.VerifyPSS(publicKey, crypto.SHA256, hashedIntent, signatureString, nil)
 	if err != nil {
 		return false
 	}
