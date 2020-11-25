@@ -12,10 +12,25 @@ import (
 )
 
 type upi struct {
-	pa string
-	pn string
-	am int
-	tn string
+	// mandatory fields
+	pa      string
+	pn      string
+	am      int
+	tn      string
+	mode    uint
+	purpose uint
+	orgid   uint
+	sign    string
+	cu      string
+	//optional fields
+	tid   uint
+	tr    string
+	mam   string
+	url   string
+	mid   string
+	msid  string
+	mtid  string
+	query string
 }
 
 //GenerateIntent Generates and returns an intent string with url encoding
