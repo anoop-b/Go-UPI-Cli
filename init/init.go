@@ -34,8 +34,13 @@ type upi struct {
 }
 
 //GenerateIntent Generates and returns an intent string with url encoding
-func GenerateIntent() string {
-	var intent upi
+func GenerateIntent() url.URL {
+	intent := upi{
+		cu:      "INR",
+		mode:    02,
+		purpose: 00,
+		orgid:   189999,
+	}
 	fmt.Println("Enter UPI ID:")
 	fmt.Scanln(&intent.pa)
 	fmt.Println("Enter Name:")
