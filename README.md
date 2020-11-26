@@ -21,9 +21,9 @@ upi help
 
 ## ToDo:
 
-- [ ] Generate UPI object from cli
-- [ ] supoprt base64 encryption and decryption
-- [ ] support PKI generation, signing and decryption.
+- [x] Generate UPI object from cli
+- [x] supoprt base64 encryption and decryption
+- [x] support PKI generation, signing and decryption.
 
 ## Resources
 
