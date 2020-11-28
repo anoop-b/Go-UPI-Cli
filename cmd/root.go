@@ -23,11 +23,9 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/cobra/doc"
 )
 
 var cfgFile string
@@ -52,10 +50,6 @@ func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
-	}
-	err := doc.GenMarkdownTree(rootCmd, "./documentation")
-	if err != nil {
-		log.Fatal(err)
 	}
 }
 
